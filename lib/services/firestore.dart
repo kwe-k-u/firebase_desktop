@@ -60,7 +60,7 @@ class Firestore{
 
   Future<String> listDocuments(String path, {Map<String, dynamic>? params }) async {
 
-    var request = http.Request('GET', Uri.parse('$_baseUrl/test?pageSize=100'));
+    var request = http.Request('GET', Uri.parse('$_baseUrl/$path?pageSize=100'));
 
 
     http.StreamedResponse response = await request.send();

@@ -2,6 +2,7 @@
 
 
 
+import 'package:firebase_desktop/services/firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 class FirestoreDocument{
@@ -19,6 +20,8 @@ class FirestoreDocument{
   factory FirestoreDocument.parseFromFirestore(Map<String,dynamic> result) {
     dynamic _parseFirestore(Map<String, dynamic> valueMap){
       switch (valueMap.keys.first){
+        case "integerValue":
+          return int.parse(valueMap.values.first);
         case "arrayValue":
           return List.generate(valueMap.values.first.length, (index) => _parseFirestore(valueMap.values.first["values"][index]));
         case "timestampValue":
@@ -32,7 +35,7 @@ class FirestoreDocument{
 
 
     Map<String,dynamic> map = {};
-    result["fields"].forEach((String key, Map<String,dynamic>value) {
+    result["fields"].forEach((String key, dynamic value) {
       map[key] = _parseFirestore(value);
     });
 
