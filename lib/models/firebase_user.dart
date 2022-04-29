@@ -18,14 +18,16 @@ class FirebaseUser{
     required this.expiration,
 });
 
-   factory FirebaseUser.fromJson(Map<String,dynamic> map) => FirebaseUser(
-      id: map["localId"],
-      email: map["email"],
-      displayName: map["displayName"],
-      idToken: map["idToken"],
-      registered: map["registered"],
-      refreshToken: map["refreshToken"],
-      expiration: map["expiresIn"]
-  );
+   factory FirebaseUser.fromJson(Map<String,dynamic> map) {
+     return FirebaseUser(
+         id: map["localId"],
+         email: map["email"],
+         displayName: map["displayName"] ?? "",
+         idToken: map["idToken"],
+         registered: map["registered"],
+         refreshToken: map["refreshToken"],
+         expiration: map["expiresIn"]
+     );
+   }
 
 }

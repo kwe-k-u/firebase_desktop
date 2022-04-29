@@ -62,6 +62,7 @@ class FirebaseDesktopAuth{
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
+    print(response.toString());
 
     if (response.statusCode == 200) {
       print("good");
@@ -87,11 +88,16 @@ class FirebaseDesktopAuth{
     };
     var request = http.Request('POST',
         Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:update?key=$apiKey'));
-    request.body = json.encode({
-      displayName != null ? "displayName": displayName : null,
-      photoUrl != null ? "photoUrl" : photoUrl : null,
-      "returnSecureToken": true
-    });
+    Map<String,dynamic> body = {"returnSecureToken": true};
+    if (displayName != null){
+      body["displayName"] = displayName;
+    }
+
+    if (photoUrl != null){
+      body["photoUrl"] = photoUrl;
+    }
+
+    request.body = json.encode(body);
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();

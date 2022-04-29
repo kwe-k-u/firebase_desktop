@@ -8,13 +8,18 @@ import 'package:flutter/cupertino.dart';
 class FirestoreDocument{
   Map<String,dynamic> data = {};
   String? name;
+  String? path;
   // DateTime
 
 
 
   FirestoreDocument(Map<String,dynamic> map){
     data = map;
-
+    // print("map ${map["name"]}");
+    path = map["name"] ;
+    // print("path ${path!.split('/')}");
+    name = path != null ?path!.split("/").last : null;
+    // print("n");
   }
 
   factory FirestoreDocument.parseFromFirestore(Map<String,dynamic> result) {

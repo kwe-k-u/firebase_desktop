@@ -35,7 +35,7 @@ class Firestore{
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      // print(await response.stream.bytesToString());
     }
     else {
       print(response.reasonPhrase);
@@ -65,6 +65,7 @@ class Firestore{
 
     http.StreamedResponse response = await request.send();
 
+    String data = await response.stream.bytesToString();
     if (response.statusCode == 200) {
       // print();
     }
@@ -72,7 +73,7 @@ class Firestore{
       print(response.reasonPhrase);
     }
 
-    return await response.stream.bytesToString();
+    return data;
 
   }
 
